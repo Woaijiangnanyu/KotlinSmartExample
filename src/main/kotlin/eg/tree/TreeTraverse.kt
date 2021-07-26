@@ -50,6 +50,49 @@ fun levelOrder(treeNode: TreeNode?): MutableList<MutableList<String>> {
     return result
 }
 
+
+/**
+ * Z型遍历
+ */
+fun zLevelOrder(treeNode: TreeNode?): MutableList<MutableList<String>> {
+    val res = mutableListOf<MutableList<String>>()
+    if (treeNode == null) return res
+    var queue = LinkedList<TreeNode>()
+    queue.offer(treeNode)
+    var isLeft = false
+    while (!queue.isEmpty()) {
+        var list = mutableListOf<String>()
+        val size = queue.size
+        isLeft = !isLeft
+        for (i in 0 until size) {
+            val value = if (isLeft) {
+                queue.pollFirst()
+            } else queue.pollLast()
+            list.add(value.value)
+            if (isLeft) {
+                if (value.left != null)
+                    queue.offerLast(value.left)
+
+                if (value.right != null)
+                    queue.offerLast(value.right)
+
+
+            } else {
+                if (value.right != null)
+                    queue.offerFirst(value.right)
+
+                if (value.left != null)
+                    queue.offerFirst(value.left)
+
+            }
+        }
+        res.add(list)
+    }
+
+    return res
+}
+
+
 fun dfs(treeNode: TreeNode?, res: MutableList<MutableList<String>>, level: Int) {
     if (treeNode == null) return
     if (level == res.size) {
@@ -64,15 +107,15 @@ fun dfs(treeNode: TreeNode?, res: MutableList<MutableList<String>>, level: Int) 
  * 层次遍历（BFS）
  */
 
-fun levelOrder2(treeNode: TreeNode?):MutableList<MutableList<String>>{
+fun levelOrder2(treeNode: TreeNode?): MutableList<MutableList<String>> {
     var result = mutableListOf<MutableList<String>>()
-    if(treeNode == null) return result
+    if (treeNode == null) return result
     var queue = LinkedList<TreeNode>()
     queue.offer(treeNode)
-    while (!queue.isEmpty()){
+    while (!queue.isEmpty()) {
         var level = mutableListOf<String>()
         var size = level.size
-        for (i in 0..size){
+        for (i in 0..size) {
             var value = queue.poll()
             level.add(value.value)
             if (value.left != null) queue.offer(value.left)
@@ -117,5 +160,8 @@ fun main() {
 //        }
 //    }
 
-    levelOrder2(a).forEach { for (value in it) print(value) }
+//    levelOrder2(a).forEach { for (value in it) print(value) }
+
+    //ACBDEFGJIH
+    zLevelOrder(a).forEach { for (value in it) print(value) }
 }
