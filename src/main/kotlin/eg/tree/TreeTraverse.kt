@@ -127,6 +127,35 @@ fun levelOrder2(treeNode: TreeNode?): MutableList<MutableList<String>> {
     return result
 }
 
+/**
+ * 左右翻转
+ */
+fun invert(treeNode: TreeNode?):TreeNode?{
+    if(treeNode != null){
+
+        var tempNode = treeNode.left
+        treeNode.left = treeNode.right
+        treeNode.right = tempNode
+
+        invert(treeNode.left)
+        invert(treeNode.right)
+    }
+    return treeNode
+}
+
+/**
+ * 获取最大值
+ */
+//fun getMax(treeNode: TreeNode?):Int{
+//    if (treeNode == null){
+//        return Int.MIN_VALUE
+//    }
+//    var left = getMax(treeNode.left)
+//    var right = getMax(treeNode.right)
+//    return Math.max(Math.max(left,right),treeNode.value)
+//}
+
+
 fun main() {
     var a = TreeNode("A")
     var b = TreeNode("B")
@@ -163,5 +192,10 @@ fun main() {
 //    levelOrder2(a).forEach { for (value in it) print(value) }
 
     //ACBDEFGJIH
-    zLevelOrder(a).forEach { for (value in it) print(value) }
+//    zLevelOrder(a).forEach { for (value in it) print(value) }
+    levelOrder(invert(a)).forEach {
+        for (value in it) {
+            print(value)
+        }
+    }
 }
