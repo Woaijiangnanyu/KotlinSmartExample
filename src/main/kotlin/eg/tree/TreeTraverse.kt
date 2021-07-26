@@ -1,6 +1,7 @@
 package eg.tree
 
 import java.util.*
+import kotlin.math.min
 
 /**
  * 先序遍历
@@ -156,6 +157,32 @@ fun invert(treeNode: TreeNode?):TreeNode?{
 //}
 
 
+/**
+ * 最大深度
+ */
+fun maxDepth(treeNode: TreeNode?):Int{
+    if (treeNode == null) return 0
+    val left = maxDepth(treeNode.left)
+    val right = maxDepth(treeNode.right)
+    return Math.max(left,right) + 1
+}
+
+/**
+ * 最小深度
+ */
+
+fun minDepth(treeNode: TreeNode?):Int{
+    if(treeNode == null) return 0
+    val left = minDepth(treeNode.left)
+    val right = minDepth(treeNode.right)
+    if (left == 0){
+        return right + 1
+    }else if (right == 0){
+        return left + 1
+    }else{
+        return Math.min(left,right) + 1
+    }
+}
 fun main() {
     var a = TreeNode("A")
     var b = TreeNode("B")
@@ -193,9 +220,11 @@ fun main() {
 
     //ACBDEFGJIH
 //    zLevelOrder(a).forEach { for (value in it) print(value) }
-    levelOrder(invert(a)).forEach {
-        for (value in it) {
-            print(value)
-        }
-    }
+//    levelOrder(invert(a)).forEach {
+//        for (value in it) {
+//            print(value)
+//        }
+//    }
+//    println(maxDepth(a))
+    println(minDepth(a))
 }
