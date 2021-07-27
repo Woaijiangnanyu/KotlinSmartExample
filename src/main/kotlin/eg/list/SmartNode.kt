@@ -32,7 +32,7 @@ fun getTailNode(head: ListNode<Int>?): ListNode<Int>? {
 /**
  * 插入尾节点
  */
-fun insertTailtNode(head: ListNode<Int>?, value: Int): ListNode<Int>? {
+fun insertTailNode(head: ListNode<Int>?, value: Int): ListNode<Int>? {
     val tail = getTailNode(head)
     if (tail == null) {
         return ListNode(value)
@@ -80,7 +80,7 @@ fun main() {
     node3.next = node4
 //    println(insertToHead(node1, 0).e)
 //    println(deleteToHead(node1)?.e)
-//    println(insertTailtNode(node1,5)?.e)
+//    println(insertTailNode(node1,5)?.e)
     deleteOtherNode(node1,node2)
     printListNode(node1)
 }
