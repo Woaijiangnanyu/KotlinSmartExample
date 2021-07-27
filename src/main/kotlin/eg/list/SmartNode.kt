@@ -4,7 +4,7 @@ package eg.list
  * 在表头插入节点
  */
 fun insertToHead(node: ListNode<Int>, value: Int): ListNode<Int> {
-    var first = ListNode(value)
+    val first = ListNode(value)
     first.next = node
     return first
 }
@@ -34,11 +34,11 @@ fun getTailNode(head: ListNode<Int>?): ListNode<Int>? {
  */
 fun insertTailNode(head: ListNode<Int>?, value: Int): ListNode<Int>? {
     val tail = getTailNode(head)
-    if (tail == null) {
-        return ListNode(value)
+    return if (tail == null) {
+        ListNode(value)
     } else {
         tail.next = ListNode(value)
-        return tail.next
+        tail.next
     }
 }
 
@@ -57,10 +57,30 @@ fun getPreNode(head: ListNode<Int>?, delete: ListNode<Int>?): ListNode<Int>? {
  * 删除任意节点
  */
 fun deleteOtherNode(head: ListNode<Int>?, delete: ListNode<Int>?){
-    var pre = getPreNode(head,delete)
+    val pre = getPreNode(head,delete)
     pre?.next = pre?.next?.next
 }
 
+/***
+ * 链表翻转
+ */
+fun reverseNodeList(head: ListNode<Int>?):ListNode<Int>?{
+    var pre:ListNode<Int>? = null
+    var current = head
+    var next = head
+    while (next != null){
+        next = current?.next
+        current?.next = pre
+        pre = current
+        current = next
+    }
+    return pre
+}
+
+
+/**
+ * 链表打印
+ */
 fun printListNode(head: ListNode<Int>?){
     var index = head
     while (index != null){
@@ -81,6 +101,7 @@ fun main() {
 //    println(insertToHead(node1, 0).e)
 //    println(deleteToHead(node1)?.e)
 //    println(insertTailNode(node1,5)?.e)
-    deleteOtherNode(node1,node2)
-    printListNode(node1)
+//    deleteOtherNode(node1,node2)
+//    printListNode(node1)
+    printListNode(reverseNodeList(node1))
 }
