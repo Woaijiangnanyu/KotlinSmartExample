@@ -183,6 +183,29 @@ fun minDepth(treeNode: TreeNode?):Int{
         return Math.min(left,right) + 1
     }
 }
+
+
+/**
+ * 是否是平衡二叉树
+ */
+fun isBalanced(treeNode: TreeNode?):Boolean{
+    return mexDepth(treeNode) != -1
+}
+
+fun mexDepth(treeNode: TreeNode?):Int{
+    if(treeNode == null){
+        return  0
+    }
+
+    val left = mexDepth(treeNode.left)
+    val right = mexDepth(treeNode.right)
+
+    if (left == -1 || right == -1 || Math.abs(left - right)>1){
+        return -1;
+    }
+    return Math.max(left,right) + 1
+}
+
 fun main() {
     var a = TreeNode("A")
     var b = TreeNode("B")
@@ -226,5 +249,6 @@ fun main() {
 //        }
 //    }
 //    println(maxDepth(a))
-    println(minDepth(a))
+//    println(minDepth(a))
+    println(isBalanced(a))
 }
