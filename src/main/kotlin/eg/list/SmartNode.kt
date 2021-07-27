@@ -77,6 +77,9 @@ fun reverseNodeList(head: ListNode<Int>?): ListNode<Int>? {
     return pre // 原始的最后一个元素指向->null
 }
 
+/**
+ * 判断是否含有环形结构
+ */
 fun hasCycle(head: ListNode<Int>?): Boolean {
     if ((head == null) or (head?.next == null)) return false
     var fast = head
@@ -92,6 +95,19 @@ fun hasCycle(head: ListNode<Int>?): Boolean {
 }
 
 /**
+ * 链表中间值
+ */
+fun middleNodeList(head: ListNode<Int>?):ListNode<Int>?{
+    if (head == null) return null
+    var fast = head
+    var slow = head
+    while ((fast?.next != null) and (fast?.next?.next != null)){
+        slow = slow?.next
+        fast = fast?.next?.next
+    }
+    return slow
+}
+/**
  * 链表打印
  */
 fun printListNode(head: ListNode<Int>?) {
@@ -104,13 +120,13 @@ fun printListNode(head: ListNode<Int>?) {
 
 
 fun main() {
-//    val node1 = ListNode<Int>(1)
-//    val node2 = ListNode<Int>(2)
-//    val node3 = ListNode<Int>(3)
-//    val node4 = ListNode<Int>(4)
-//    node1.next = node2
-//    node2.next = node3
-//    node3.next = node4
+    val node1 = ListNode<Int>(1)
+    val node2 = ListNode<Int>(2)
+    val node3 = ListNode<Int>(3)
+    val node4 = ListNode<Int>(4)
+    node1.next = node2
+    node2.next = node3
+    node3.next = node4
 //    println(insertToHead(node1, 0).e)
 //    println(deleteToHead(node1)?.e)
 //    println(insertTailNode(node1,5)?.e)
@@ -127,4 +143,5 @@ fun main() {
 //    node3.next = node4
 //    node4.next = node1
 //    println(hasCycle(node1))
+    println(middleNodeList(node1)?.e)
 }
