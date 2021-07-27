@@ -18,6 +18,58 @@ fun deleteToHead(node: ListNode<Int>): ListNode<Int>? {
     return fist
 }
 
+/***
+ * 获取尾节点
+ */
+fun getTailNode(head: ListNode<Int>?): ListNode<Int>? {
+    var tail = head
+    while (tail?.next != null) {
+        tail = tail.next
+    }
+    return tail
+}
+
+/**
+ * 插入尾节点
+ */
+fun insertTailtNode(head: ListNode<Int>?, value: Int): ListNode<Int>? {
+    val tail = getTailNode(head)
+    if (tail == null) {
+        return ListNode(value)
+    } else {
+        tail.next = ListNode(value)
+        return tail.next
+    }
+}
+
+/**
+ * 获取该节点上个节点
+ */
+fun getPreNode(head: ListNode<Int>?, delete: ListNode<Int>?): ListNode<Int>? {
+    var pre = head
+    while (pre?.next != delete) {
+        pre = pre?.next
+    }
+    return pre
+}
+
+/**
+ * 删除任意节点
+ */
+fun deleteOtherNode(head: ListNode<Int>?, delete: ListNode<Int>?){
+    var pre = getPreNode(head,delete)
+    pre?.next = pre?.next?.next
+}
+
+fun printListNode(head: ListNode<Int>?){
+    var index = head
+    while (index != null){
+        println(index.e)
+        index = index.next
+    }
+}
+
+
 fun main() {
     val node1 = ListNode<Int>(1)
     val node2 = ListNode<Int>(2)
@@ -27,5 +79,8 @@ fun main() {
     node2.next = node3
     node3.next = node4
 //    println(insertToHead(node1, 0).e)
-    println(deleteToHead(node1)?.e)
+//    println(deleteToHead(node1)?.e)
+//    println(insertTailtNode(node1,5)?.e)
+    deleteOtherNode(node1,node2)
+    printListNode(node1)
 }
