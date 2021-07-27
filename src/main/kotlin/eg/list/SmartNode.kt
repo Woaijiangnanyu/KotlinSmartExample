@@ -56,34 +56,47 @@ fun getPreNode(head: ListNode<Int>?, delete: ListNode<Int>?): ListNode<Int>? {
 /**
  * 删除任意节点
  */
-fun deleteOtherNode(head: ListNode<Int>?, delete: ListNode<Int>?){
-    val pre = getPreNode(head,delete)
+fun deleteOtherNode(head: ListNode<Int>?, delete: ListNode<Int>?) {
+    val pre = getPreNode(head, delete)
     pre?.next = pre?.next?.next
 }
 
 /***
  * 链表翻转
  */
-fun reverseNodeList(head: ListNode<Int>?):ListNode<Int>?{
-    var pre:ListNode<Int>? = null
+fun reverseNodeList(head: ListNode<Int>?): ListNode<Int>? {
+    var pre: ListNode<Int>? = null
     var current = head
     var next = head
-    while (next != null){
+    while (next != null) {
         next = current?.next
         current?.next = pre
         pre = current
         current = next
     }
-    return pre
+    return pre // 原始的最后一个元素指向->null
 }
 
+fun hasCycle(head: ListNode<Int>?): Boolean {
+    if ((head == null) or (head?.next == null)) return false
+    var fast = head
+    var slow = head
+    while ((fast?.next != null) and (fast?.next?.next != null)) {
+        slow = slow?.next
+        fast = fast?.next?.next
+        if (slow == fast) {
+            return true
+        }
+    }
+    return false
+}
 
 /**
  * 链表打印
  */
-fun printListNode(head: ListNode<Int>?){
+fun printListNode(head: ListNode<Int>?) {
     var index = head
-    while (index != null){
+    while (index != null) {
         println(index.e)
         index = index.next
     }
@@ -91,17 +104,27 @@ fun printListNode(head: ListNode<Int>?){
 
 
 fun main() {
-    val node1 = ListNode<Int>(1)
-    val node2 = ListNode<Int>(2)
-    val node3 = ListNode<Int>(3)
-    val node4 = ListNode<Int>(4)
-    node1.next = node2
-    node2.next = node3
-    node3.next = node4
+//    val node1 = ListNode<Int>(1)
+//    val node2 = ListNode<Int>(2)
+//    val node3 = ListNode<Int>(3)
+//    val node4 = ListNode<Int>(4)
+//    node1.next = node2
+//    node2.next = node3
+//    node3.next = node4
 //    println(insertToHead(node1, 0).e)
 //    println(deleteToHead(node1)?.e)
 //    println(insertTailNode(node1,5)?.e)
 //    deleteOtherNode(node1,node2)
 //    printListNode(node1)
-    printListNode(reverseNodeList(node1))
+//    printListNode(reverseNodeList(node1))
+
+//    val node1 = ListNode<Int>(1)
+//    val node2 = ListNode<Int>(2)
+//    val node3 = ListNode<Int>(3)
+//    val node4 = ListNode<Int>(4)
+//    node1.next = node2
+//    node2.next = node3
+//    node3.next = node4
+//    node4.next = node1
+//    println(hasCycle(node1))
 }
