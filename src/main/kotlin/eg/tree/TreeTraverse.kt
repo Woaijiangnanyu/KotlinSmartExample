@@ -115,8 +115,8 @@ fun levelOrder2(treeNode: TreeNode?): MutableList<MutableList<String>> {
     queue.offer(treeNode)
     while (!queue.isEmpty()) {
         var level = mutableListOf<String>()
-        var size = level.size
-        for (i in 0..size) {
+        var size = queue.size
+        for (i in 0 until size) {
             var value = queue.poll()
             level.add(value.value)
             if (value.left != null) queue.offer(value.left)
@@ -239,7 +239,7 @@ fun main() {
 //        }
 //    }
 
-//    levelOrder2(a).forEach { for (value in it) print(value) }
+    levelOrder2(a).forEach { for (value in it) print(value) }
 
     //ACBDEFGJIH
 //    zLevelOrder(a).forEach { for (value in it) print(value) }
@@ -250,5 +250,5 @@ fun main() {
 //    }
 //    println(maxDepth(a))
 //    println(minDepth(a))
-    println(isBalanced(a))
+//    println(isBalanced(a))
 }
