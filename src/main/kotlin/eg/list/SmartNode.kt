@@ -217,6 +217,39 @@ fun removeNthFormEnd(root: ListNode<Int>?, n: Int): ListNode<Int>? {
 }
 
 /**
+ * 判断两个链表是否含有相交节点
+ */
+fun getIntersectionNode(headA: ListNode<Int>?, headB: ListNode<Int>?): ListNode<Int>?{
+    var lenA = 0
+    var lenB = 0
+    var currA = headA
+    var currB = headB
+    while (currA != null) {
+        lenA++
+        currA = currA?.next
+    }
+    while (currB != null) {
+        lenB++
+        currB = currB?.next
+    }
+    currA = headA
+    currB = headB
+    if (lenA > lenB) {
+        currA = currA?.next
+        lenA--
+    }
+    if(lenA < lenB){
+        currB = currB?.next
+        lenB--
+    }
+    while (currA != currB){
+        currA = currA?.next
+        currB = currB?.next
+    }
+    return currA
+}
+
+/**
  * 链表打印
  */
 fun printListNode(head: ListNode<Int>?) {
@@ -229,13 +262,13 @@ fun printListNode(head: ListNode<Int>?) {
 
 
 fun main() {
-    val node1 = ListNode<Int>(1)
-    val node2 = ListNode<Int>(2)
-    val node3 = ListNode<Int>(3)
-    val node4 = ListNode<Int>(4)
-    node1.next = node2
-    node2.next = node3
-    node3.next = node4
+//    val node1 = ListNode<Int>(1)
+//    val node2 = ListNode<Int>(2)
+//    val node3 = ListNode<Int>(3)
+//    val node4 = ListNode<Int>(4)
+//    node1.next = node2
+//    node2.next = node3
+//    node3.next = node4
 //    println(insertToHead(node1, 0).e)
 //    println(deleteToHead(node1)?.e)
 //    println(insertTailNode(node1,5)?.e)
@@ -281,5 +314,28 @@ fun main() {
 //    node3.next = node4
 //    printListNode(sortList1(node1))
 //    printListNode(sortList(node1))
-    println(removeNthFormEnd(node1, 2)?.e)
+//    println(removeNthFormEnd(node1, 2)?.e)
+
+    val node1 = ListNode<Int>(1)
+    val node2 = ListNode<Int>(2)
+    val node3 = ListNode<Int>(3)
+    val node4 = ListNode<Int>(4)
+    val node5 = ListNode<Int>(5)
+    val node6 = ListNode<Int>(6)
+    val node7 = ListNode<Int>(7)
+    val node8 = ListNode<Int>(8)
+    val node9 = ListNode<Int>(9)
+    val node10 = ListNode<Int>(10)
+    node1.next = node2
+    node2.next = node3
+    node3.next = node4
+    node4.next = node5
+    node5.next = node6
+    node7.next = node8
+    node8.next = node9
+    node9.next = node10
+    node10.next = node5
+
+    println(getIntersectionNode(node1,node7)?.e)
+
 }
