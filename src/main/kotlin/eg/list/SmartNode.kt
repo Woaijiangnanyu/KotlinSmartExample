@@ -108,6 +108,9 @@ fun middleNodeList(head: ListNode<Int>?): ListNode<Int>? {
     return slow
 }
 
+/**
+ * 合并两个有序链表
+ */
 fun mergeTwoNodeList(first: ListNode<Int>?, second: ListNode<Int>?): ListNode<Int>? {
     var one = first
     var two = second
@@ -154,6 +157,9 @@ fun sortList(head: ListNode<Int>?): ListNode<Int>? {
     return head
 }
 
+/**
+ * 快排
+ */
 fun quickSortList(start: ListNode<Int>?, end: ListNode<Int>?) {
     if (start == end) return  // 这里比较的是对象
     val p = partitionNode(start, end)
@@ -188,6 +194,27 @@ fun swapValue(p1: ListNode<Int>?, p2: ListNode<Int>?) {
     p2?.e = temp
 }
 
+/**
+ * 删除链表倒数第N个元素并返回
+ */
+fun removeNthFormEnd(root: ListNode<Int>?, n: Int): ListNode<Int>? {
+    var head = root
+    if (n <= 0) {
+        return null
+    }
+    var preDel: ListNode<Int>? = ListNode(0)
+    preDel?.next = head
+    for (i in 0..n) {
+        if (head == null) return null
+        head = head?.next
+    }
+    while (head != null) {
+        head = head?.next
+        preDel = preDel?.next
+    }
+    preDel?.next = preDel?.next?.next
+    return preDel?.next
+}
 
 /**
  * 链表打印
@@ -202,13 +229,13 @@ fun printListNode(head: ListNode<Int>?) {
 
 
 fun main() {
-//    val node1 = ListNode<Int>(1)
-//    val node2 = ListNode<Int>(2)
-//    val node3 = ListNode<Int>(3)
-//    val node4 = ListNode<Int>(4)
-//    node1.next = node2
-//    node2.next = node3
-//    node3.next = node4
+    val node1 = ListNode<Int>(1)
+    val node2 = ListNode<Int>(2)
+    val node3 = ListNode<Int>(3)
+    val node4 = ListNode<Int>(4)
+    node1.next = node2
+    node2.next = node3
+    node3.next = node4
 //    println(insertToHead(node1, 0).e)
 //    println(deleteToHead(node1)?.e)
 //    println(insertTailNode(node1,5)?.e)
@@ -245,13 +272,14 @@ fun main() {
 
 //    printListNode(mergeTwoNodeList(node1, node2))
 
-    val node1 = ListNode<Int>(10)
-    val node2 = ListNode<Int>(2)
-    val node3 = ListNode<Int>(3)
-    val node4 = ListNode<Int>(44)
-    node1.next = node2
-    node2.next = node3
-    node3.next = node4
+//    val node1 = ListNode<Int>(10)
+//    val node2 = ListNode<Int>(2)
+//    val node3 = ListNode<Int>(3)
+//    val node4 = ListNode<Int>(44)
+//    node1.next = node2
+//    node2.next = node3
+//    node3.next = node4
 //    printListNode(sortList1(node1))
-    printListNode(sortList(node1))
+//    printListNode(sortList(node1))
+    println(removeNthFormEnd(node1, 2)?.e)
 }
