@@ -134,6 +134,61 @@ fun mergeTwoNodeList(first: ListNode<Int>?, second: ListNode<Int>?): ListNode<In
     return temp?.next
 }
 
+/***
+ * 归并排序方式
+ */
+fun sortList1(head: ListNode<Int>?): ListNode<Int>? {
+    if ((head == null) or (head?.next == null)) return head
+    val middle = middleNodeList(head)
+    var right = sortList1(middle?.next)
+    middle?.next = null
+    var left = sortList1(head)
+    return mergeTwoNodeList(left, right)
+}
+
+/**
+ * 快速排序方式
+ */
+fun sortList(head: ListNode<Int>?): ListNode<Int>? {
+    quickSortList(head, null)
+    return head
+}
+
+fun quickSortList(start: ListNode<Int>?, end: ListNode<Int>?) {
+    if (start == end) return  // 这里比较的是对象
+    val p = partitionNode(start, end)
+    quickSortList(start, p)
+    quickSortList(p?.next, end)
+}
+
+/**
+ * 获取分割点
+ */
+fun partitionNode(start: ListNode<Int>?, end: ListNode<Int>?): ListNode<Int>? {
+    val pivotKey = start?.e // 获取轴值
+    var p1 = start
+    var p2 = start?.next
+    while (p2 != end) {
+        if (p2?.e!! < pivotKey!!) {
+            p1 = p1?.next
+            swapValue(p1, p2)
+        }
+        p2 = p2?.next
+    }
+    swapValue(start, p1)
+    return p1
+}
+
+/**
+ * 只做值交换
+ */
+fun swapValue(p1: ListNode<Int>?, p2: ListNode<Int>?) {
+    var temp = p1?.e!!
+    p1?.e = p2?.e!!
+    p2?.e = temp
+}
+
+
 /**
  * 链表打印
  */
@@ -172,21 +227,31 @@ fun main() {
 //    println(hasCycle(node1))
 //    println(middleNodeList(node1)?.e)
 
-    val node1 = ListNode<Int>(1)
-    val node3 = ListNode<Int>(3)
-    val node5 = ListNode<Int>(5)
-    val node7 = ListNode<Int>(7)
-    node1.next = node3
-    node3.next = node5
-    node5.next = node7
+//    val node1 = ListNode<Int>(1)
+//    val node3 = ListNode<Int>(3)
+//    val node5 = ListNode<Int>(5)
+//    val node7 = ListNode<Int>(7)
+//    node1.next = node3
+//    node3.next = node5
+//    node5.next = node7
+//
+//    val node2 = ListNode<Int>(2)
+//    val node4 = ListNode<Int>(4)
+//    val node6 = ListNode<Int>(6)
+//    val node8 = ListNode<Int>(8)
+//    node2.next = node4
+//    node4.next = node6
+//    node6.next = node8
 
+//    printListNode(mergeTwoNodeList(node1, node2))
+
+    val node1 = ListNode<Int>(10)
     val node2 = ListNode<Int>(2)
-    val node4 = ListNode<Int>(4)
-    val node6 = ListNode<Int>(6)
-    val node8 = ListNode<Int>(8)
-    node2.next = node4
-    node4.next = node6
-    node6.next = node8
-
-    printListNode(mergeTwoNodeList(node1,node2))
+    val node3 = ListNode<Int>(3)
+    val node4 = ListNode<Int>(44)
+    node1.next = node2
+    node2.next = node3
+    node3.next = node4
+//    printListNode(sortList1(node1))
+    printListNode(sortList(node1))
 }
