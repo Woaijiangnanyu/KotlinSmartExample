@@ -11,7 +11,7 @@ fun isValidParentheses(s: String): Boolean {
     for (c in s.toCharArray()) {
         if ("({[".contains(c)) {
             stack.push(c)
-        } else if (")]}".contains(c)){
+        } else if (")]}".contains(c)) {
             if (!stack.isEmpty() && isValid(stack.peek(), c)) {
                 stack.pop()
             } else return false
@@ -24,8 +24,47 @@ fun isValid(a: Char, b: Char): Boolean {
     return (a == '(' && b == ')') || (a == '[' && b == ']') || (a == '{' && b == '}')
 }
 
-fun main() {
-    var s = "(abc)a{(bb)[1][1][3]}"
-    var s1 = "(abc{)}{(bb)}1][1][3]}"
-    println(isValidParentheses(s))
+class StackQueue<T> {
+    var inStack = Stack<T>();
+    var outStack = Stack<T>()
+
+    private fun in2outStack() {
+        while (!inStack.isEmpty()) {
+            outStack.push(inStack.pop())
+        }
+    }
+
+    fun push(value: T) {
+        inStack.push(value)
+    }
+
+    fun pop(): T {
+        if (!inStack.isEmpty()) {
+            in2outStack()
+        }
+        return outStack.pop()
+    }
+
+    fun top(): T {
+        if (!inStack.isEmpty()) {
+            in2outStack()
+        }
+        return outStack.peek()
+    }
 }
+
+fun main() {
+//    var s = "(abc)a{(bb)[1][1][3]}"
+//    var s1 = "(abc{)}{(bb)}1][1][3]}"
+//    println(isValidParentheses(s))
+
+    var queue = StackQueue<Int>()
+    queue.push(1)
+    queue.push(2)
+    queue.push(3)
+    queue.push(4)
+    queue.push(5)
+    println(queue.pop())
+    println(queue.top())
+}
+
