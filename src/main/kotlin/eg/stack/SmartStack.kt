@@ -25,29 +25,30 @@ class MinStack() {
         return minStack.peek()
     }
 
-    /*
- * 给定一个字符串表示括号序列，()(){}[and] 代表有效括号序列 [(])
- */
-    fun isValidParentheses(s: String): Boolean {
-        var stack = Stack<Char>()
-        if (s.isNullOrBlank()) false
-        for (c in s.toCharArray()) {
-            if ("({[".contains(c)) {
-                stack.push(c)
-            } else if (")]}".contains(c)) {
-                if (!stack.isEmpty() && isValid(stack.peek(), c)) {
-                    stack.pop()
-                } else return false
-            }
-        }
-        return stack.isEmpty()
-    }
-
-    fun isValid(a: Char, b: Char): Boolean {
-        return (a == '(' && b == ')') || (a == '[' && b == ']') || (a == '{' && b == '}')
-    }
-
 }
+
+/*
+* 给定一个字符串表示括号序列，()(){}[and] 代表有效括号序列 [(])
+*/
+fun isValidParentheses(s: String): Boolean {
+    var stack = Stack<Char>()
+    if (s.isNullOrBlank()) false
+    for (c in s.toCharArray()) {
+        if ("({[".contains(c)) {
+            stack.push(c)
+        } else if (")]}".contains(c)) {
+            if (!stack.isEmpty() && isValid(stack.peek(), c)) {
+                stack.pop()
+            } else return false
+        }
+    }
+    return stack.isEmpty()
+}
+
+fun isValid(a: Char, b: Char): Boolean {
+    return (a == '(' && b == ')') || (a == '[' && b == ']') || (a == '{' && b == '}')
+}
+
 
 class StackQueue<T> {
     var inStack = Stack<T>();
