@@ -1,7 +1,30 @@
 package eg.stack
 
-import com.sun.xml.internal.fastinfoset.util.StringArray
 import java.util.*
+/**
+ * 实现一个栈，实现方法min()获取栈内最小元素
+ */
+class MinStack() {
+    private var stack: Stack<Int> = Stack()
+    private var minStack: Stack<Int> = Stack()
+
+    fun push(value: Int) {
+        stack.push(value)
+        if (minStack.isEmpty()) {
+            minStack.push(value)
+        } else minStack.push(Math.min(value, minStack.pop()))
+    }
+
+    fun pop(): Int {
+        minStack.pop()
+        return stack.pop()
+    }
+
+    fun min(): Int {
+        return minStack.peek()
+    }
+
+}
 
 /**
  * 给定一个字符串表示括号序列，()(){}[and] 代表有效括号序列 [(])
@@ -84,6 +107,13 @@ fun evalRPN(s: Array<String>): Int {
 }
 
 fun main() {
+    val stack = MinStack()
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    println("最小值：${stack.min()}")
+    println("弹出值：${stack.pop()}")
+
 //    var s = "(abc)a{(bb)[1][1][3]}"
 //    var s1 = "(abc{)}{(bb)}1][1][3]}"
 //    println(isValidParentheses(s))
