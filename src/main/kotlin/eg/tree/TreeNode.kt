@@ -1,6 +1,6 @@
 package eg.tree
 
-class TreeNode(var value: String) {
-    var left:TreeNode? = null
-    var right:TreeNode? = null
+class TreeNode<T>(var value: T) {
+    var left:TreeNode<T>? = null
+    var right:TreeNode<T>? = null
 }
