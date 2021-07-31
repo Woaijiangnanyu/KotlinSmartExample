@@ -221,14 +221,35 @@ fun isValidBST(root: TreeNode<Long>): Boolean {
 
 fun isValidBST(root: TreeNode<Long>?, min: Long, max: Long): Boolean {
     if (root == null) return true
-    println("root.value:${root.value}")
-    println("min$min")
-    println("max$max")
+//    println("root.value:${root.value}")
+//    println("min$min")
+//    println("max$max")
     if ((root.value <= min) or (root.value >= max)) return false
     return (isValidBST(root.left, min, root.value)
             and
             isValidBST(root.right, root.value, max))
 
+}
+
+/**
+ * 第K小元素数
+ *
+ */
+fun kthSmallest(root: TreeNode<Int>?, k: Int): Int {
+    if (root == null) return 0
+    val leftCount = nodeCount(root.left)
+    if (leftCount >= k) {
+        return kthSmallest(root.left, k)
+    } else if ((leftCount + 1) == k) {
+        return root.value
+    } else {
+        return kthSmallest(root.right, k - leftCount - 1) // 不算root节点，访问剩余节点数
+    }
+}
+
+fun nodeCount(root: TreeNode<Int>?): Int {
+    if (root == null) return 0
+    return nodeCount(root.left) + nodeCount(root.right) + 1
 }
 
 fun main() {
@@ -277,14 +298,20 @@ fun main() {
 //    println(minDepth(a))
 //    println(isBalanced(a))
 
-    var tree1 = TreeNode<Long>(1)
-    var tree2 = TreeNode<Long>(5)
-    var tree3 = TreeNode<Long>(8)
-    var tree4 = TreeNode<Long>(2)
-    var tree5 = TreeNode<Long>(3)
-    tree1.left= tree2
-    tree1.right = tree3
-    tree2.left = tree4
-    tree2.right = tree5
-    println(isValidBST(tree1))
+//    var tree1 = TreeNode<Long>(5)
+////    var tree2 = TreeNode<Long>(2)
+////    var tree3 = TreeNode<Long>(3)
+////    var tree4 = TreeNode<Long>(1)
+////    var tree5 = TreeNode<Long>(8)
+////    tree1.left = tree3
+////    tree1.right = tree5
+//    println(isValidBST(tree1))
+    var tree1 = TreeNode<Int>(5)
+    var tree2 = TreeNode<Int>(2)
+    var tree3 = TreeNode<Int>(3)
+    var tree4 = TreeNode<Int>(1)
+    var tree5 = TreeNode<Int>(8)
+    tree1.left = tree3
+    tree1.right = tree5
+    println(kthSmallest(tree1,2))
 }
