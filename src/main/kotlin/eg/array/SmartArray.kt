@@ -1,5 +1,7 @@
 package eg.array
 
+import java.util.*
+
 /**
  * 数字加一
  * 给定一个非负数，该数表示一个数组，该数加一，并返回一个数组，该数组高低位顺序排列
@@ -33,19 +35,51 @@ fun plusOne(num: Array<Int>): Array<Int> {
 /**
  * 删除数组中指定的元素,并返回新数组大小
  */
-fun delElement(src:Array<Int>?,elem:Int):Int{
+fun delElement(src: Array<Int>?, elem: Int): Int {
     if (src.isNullOrEmpty()) return -1
     var index = 0
-    for (i in src.indices){
-        if (src[i] != elem){
+    for (i in src.indices) {
+        if (src[i] != elem) {
             src[index++] = src[i]
         }
     }
     return index
 }
 
+/**
+ *
+ */
+
+fun removeDuplicate(nums: Array<Int>?): Int {
+    var src = nums
+    if (src.isNullOrEmpty()) return -1
+    var i = 0
+    loop@ while (i != src!!.size) {
+        if (i == src.size -1) break
+        for (k in i+1 until src!!.size){
+            if (src[i] == src[k]){
+                var index = k // 第一个重复的元素
+                for (j in index until src.size){
+                    if (j != src.size -1){
+                        src[j] = src[j+1]
+                    }else{
+                        src[j] = src[j]
+                    }
+                }
+                src = Arrays.copyOf(src,src.size -1) // 数组重新分配空间
+                i = 0 // 重新开始遍历
+                continue@loop //跳到外循环继续执行
+            }
+        }
+        i++ // 不重复时i累加
+    }
+    return src.size
+}
+
 fun main() {
-    var numStr = arrayOf(9,9,9)
+    var numStr = arrayOf(9, 9, 9)
 //    plusOne(numStr).forEach { println(it) }
-    println(delElement(numStr,9))
+//    println(delElement(numStr,9))
+    val src = arrayOf(1, 2, 1, 3)
+    println(removeDuplicate(src))
 }
