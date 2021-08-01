@@ -102,13 +102,30 @@ fun mergeSortArray(srcA: Array<Int>, srcB: Array<Int>): Array<Int> {
     return a
 }
 
+/**
+ * 最大子数组的和
+ * sum 累加数组之和，如果累加得到的数小于0，则sum赋值0，重新开始累加
+ */
+fun maxSubArraySum(src:Array<Int>?):Int{
+    if(src.isNullOrEmpty()) return Int.MIN_VALUE
+    var max = Int.MIN_VALUE
+    var sum = 0
+    for (value in src){
+        sum += value
+        max = Math.max(sum,max)
+        sum = Math.max(sum,0)
+    }
+    return max
+}
 fun main() {
 //    var numStr = arrayOf(9, 9, 9)
 //    plusOne(numStr).forEach { println(it) }
 //    println(delElement(numStr,9))
 //    val src = arrayOf(1, 2, 1, 3)
 //    println(removeDuplicate(src))
-    var srcA = arrayOf(1,3,5,7,9)
-    val srcB = arrayOf(2,4,6,8,10)
-    mergeSortArray(srcA,srcB).forEach(::println)
+//    var srcA = arrayOf(1,3,5,7,9)
+//    val srcB = arrayOf(2,4,6,8,10)
+//    mergeSortArray(srcA,srcB).forEach(::println)
+    var nums = arrayOf(1,-1,1,-1,1,1,-1)
+    println(maxSubArraySum(nums))
 }
