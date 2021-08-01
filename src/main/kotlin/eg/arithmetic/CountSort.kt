@@ -61,7 +61,8 @@ fun CountSort(values: IntArray): IntArray {
 
 fun main() {
 //    val nums = intArrayOf(0, 2, 5, 3, 7, 9, 10, 3, 7, 6)
-    val nums = intArrayOf(0,1,100)
+//    val nums = intArrayOf(0,1,100)
 //    CountSort01(nums).forEach(::println)
-    CountSort(nums).forEach(::println)
+//    CountSort(nums).forEach(::println)
+//    println(1 % 10)
 }
