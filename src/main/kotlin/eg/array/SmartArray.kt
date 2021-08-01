@@ -47,9 +47,8 @@ fun delElement(src: Array<Int>?, elem: Int): Int {
 }
 
 /**
- *
+ *删除重复元素
  */
-
 fun removeDuplicate(nums: Array<Int>?): Int {
     var src = nums
     if (src.isNullOrEmpty()) return -1

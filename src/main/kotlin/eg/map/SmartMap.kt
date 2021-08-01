@@ -1,6 +1,4 @@
-package eg.hash
-
-import kotlin.math.max
+package eg.map
 
 /**
  * 给一个整数数组，找出两个数，使得他们的和等于目标target，并返回两个数下标
