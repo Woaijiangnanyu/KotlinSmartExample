@@ -15,10 +15,10 @@ class SmartCalendar {
     fun book(start: Int, end: Int): Boolean {
         val previous = treeMap.floorKey(start) // 返回的键最大小于等于给定的键
         var next = treeMap.ceilingKey(start)  // 返回的最小键大于等于给定的键
-        return if ((previous == null || (treeMap.get(previous)!! <= start))
+        return if ((previous == null || (treeMap[previous]!! <= start))
             && (next == null || end <= next)
         ) {
-            treeMap.put(start, end)
+            treeMap[start] = end
             true
         } else false
     }

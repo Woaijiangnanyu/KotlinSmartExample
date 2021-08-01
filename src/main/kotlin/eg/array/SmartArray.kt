@@ -54,18 +54,18 @@ fun removeDuplicate(nums: Array<Int>?): Int {
     if (src.isNullOrEmpty()) return -1
     var i = 0
     loop@ while (i != src!!.size) {
-        if (i == src.size -1) break
-        for (k in i+1 until src!!.size){
-            if (src[i] == src[k]){
+        if (i == src.size - 1) break
+        for (k in i + 1 until src!!.size) {
+            if (src[i] == src[k]) {
                 var index = k // 第一个重复的元素
-                for (j in index until src.size){
-                    if (j != src.size -1){
-                        src[j] = src[j+1]
-                    }else{
+                for (j in index until src.size) {
+                    if (j != src.size - 1) {
+                        src[j] = src[j + 1]
+                    } else {
                         src[j] = src[j]
                     }
                 }
-                src = Arrays.copyOf(src,src.size -1) // 数组重新分配空间
+                src = Arrays.copyOf(src, src.size - 1) // 数组重新分配空间
                 i = 0 // 重新开始遍历
                 continue@loop //跳到外循环继续执行
             }
@@ -75,10 +75,40 @@ fun removeDuplicate(nums: Array<Int>?): Int {
     return src.size
 }
 
+/**
+ * 合并排序数组
+ *
+ */
+fun mergeSortArray(srcA: Array<Int>, srcB: Array<Int>): Array<Int> {
+    var a = srcA
+    var b = srcB
+    var i = a.size - 1
+    var j = b.size - 1
+    var index = a.size + b.size - 1
+    //数组扩容
+    a = Arrays.copyOf(a, a.size + b.size)
+    while ((i >= 0) and (j >= 0)) {
+        if (a[i] > b[j]) {
+            a[index--] = a[i--]
+        } else a[index--] = b[j--]
+    }
+    while (i >= 0) {
+        a[index--] = a[i--]
+    }
+
+    while (j >= 0) {
+        a[index--] = a[j--]
+    }
+    return a
+}
+
 fun main() {
-    var numStr = arrayOf(9, 9, 9)
+//    var numStr = arrayOf(9, 9, 9)
 //    plusOne(numStr).forEach { println(it) }
 //    println(delElement(numStr,9))
-    val src = arrayOf(1, 2, 1, 3)
-    println(removeDuplicate(src))
+//    val src = arrayOf(1, 2, 1, 3)
+//    println(removeDuplicate(src))
+    var srcA = arrayOf(1,3,5,7,9)
+    val srcB = arrayOf(2,4,6,8,10)
+    mergeSortArray(srcA,srcB).forEach(::println)
 }
