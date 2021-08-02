@@ -1,8 +1,11 @@
 package eg.string
 
+import gjl.utils.SmartSort
+import java.lang.StringBuilder
+
 /**
  * 生成括号组合
- *
+ * 给定n对，生成所有有效的括号组合
  */
 fun generateParenthesis(n: Int): MutableList<String>? {
     if (n <= 0) return null
@@ -29,6 +32,25 @@ fun generateHelper(nL: Int, nR: Int, parenthesis: String, src: MutableList<Strin
 
 }
 
+/**
+ * Excel表列标题
+ * 给定一个正整数，返回相应的列标题，如Excel表中所示。
+ * 如1 -> A，2 -> B...26 -> Z，27 -> AA
+ */
+fun convertToTitle(num: Int): String {
+    var n = num
+    val str = StringBuilder()
+    while (n > 0) {
+        n--
+        str.append('A'.plus(n % 26))
+        n/=26
+    }
+    return str.reverse().toString()
+}
+
 fun main() {
-    generateParenthesis(3)?.forEach(::println)
+//    generateParenthesis(3)?.forEach(::println)
+    println(convertToTitle(27))
+//    var ss = SmartSort()
+//    println(ss.convertToTitle(28))
 }
