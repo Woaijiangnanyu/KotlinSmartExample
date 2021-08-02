@@ -117,6 +117,24 @@ fun maxSubArraySum(src:Array<Int>?):Int{
     }
     return max
 }
+
+/***
+ * 找到数组中的主元素
+ * 主元素：在数组中出现的次数严格意义上大于数组元素个数二分之一
+ */
+fun findMajorElement(src: Array<Int>):Int{
+    var count = 0
+    var numMajor = 0
+    for (num in src){
+        if (count == 0){
+            numMajor = num
+        }
+        if (num == numMajor){
+            count++
+        }else count--
+    }
+    return numMajor
+}
 fun main() {
 //    var numStr = arrayOf(9, 9, 9)
 //    plusOne(numStr).forEach { println(it) }
@@ -126,6 +144,8 @@ fun main() {
 //    var srcA = arrayOf(1,3,5,7,9)
 //    val srcB = arrayOf(2,4,6,8,10)
 //    mergeSortArray(srcA,srcB).forEach(::println)
-    var nums = arrayOf(1,-1,1,-1,1,1,-1)
-    println(maxSubArraySum(nums))
+//    var nums = arrayOf(1,-1,1,-1,1,1,-1)
+//    println(maxSubArraySum(nums))
+    var nums = arrayOf(1,2,3,1,1,1,1,2,1)
+    println(findMajorElement(nums))
 }
