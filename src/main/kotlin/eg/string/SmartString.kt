@@ -68,11 +68,29 @@ fun generatePossibleNextMoves(str: String): MutableList<String> {
     return list
 }
 
+
+/**
+ * 翻转字符串中的单词
+ */
+fun reverseWord(src: String): String {
+    var split = src.split(" ")
+    var strBuilder = StringBuilder()
+    for (i in split.size - 1 downTo 0) {
+        if (!strBuilder.isNullOrEmpty()) {
+            strBuilder.append(" ")
+        }
+        strBuilder.append(split[i])
+    }
+    return strBuilder.toString()
+}
+
 fun main() {
 //    generateParenthesis(3)?.forEach(::println)
 //    println(convertToTitle(27))
 //    var ss = SmartSort()
 //    println(ss.convertToTitle(28))
-    var ss = "++++++-+"
-    generatePossibleNextMoves(ss).forEach(::println)
+//    var ss = "++++++-+"
+//    generatePossibleNextMoves(ss).forEach(::println)
+    var ss = "A B C Hello World"
+    println(reverseWord(ss))
 }

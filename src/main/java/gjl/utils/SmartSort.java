@@ -30,4 +30,15 @@ public class SmartSort {
             for (int x = 0; x < 10; x++) index[x] = 0;
         }
     }
+
+    public String convertToTitle (int n) {
+        StringBuilder str = new StringBuilder();
+
+        while (n > 0) {
+            n--;
+            str.append ( (char) ( (n % 26) + 'A'));
+            n /= 26;
+        }
+        return str.reverse().toString();
+    }
 }
