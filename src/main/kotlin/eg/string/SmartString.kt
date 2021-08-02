@@ -84,6 +84,23 @@ fun reverseWord(src: String): String {
     return strBuilder.toString()
 }
 
+/**
+ *最长公共前缀
+ */
+fun longestCommonPrefix(src: Array<String>?): String {
+    if (src.isNullOrEmpty()) return ""
+    var prefix = src[0]
+    for (i in 1 until src.size - 1){
+        var j = 0
+        while ((j < src[i].length) and (j < prefix.length) and (src[i][j] == prefix[j])){
+            j++
+        }
+        if (j == 0) return ""
+        prefix = src[i].substring(0,j)
+    }
+    return prefix
+}
+
 fun main() {
 //    generateParenthesis(3)?.forEach(::println)
 //    println(convertToTitle(27))
@@ -91,6 +108,8 @@ fun main() {
 //    println(ss.convertToTitle(28))
 //    var ss = "++++++-+"
 //    generatePossibleNextMoves(ss).forEach(::println)
-    var ss = "A B C Hello World"
-    println(reverseWord(ss))
+//    var ss = "A B C Hello World"
+//    println(reverseWord(ss))
+    var ss = arrayOf("AAB","AAC","AAAD")
+    println(longestCommonPrefix(ss))
 }
