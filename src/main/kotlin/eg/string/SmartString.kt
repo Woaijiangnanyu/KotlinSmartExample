@@ -16,11 +16,11 @@ fun generateParenthesis(n: Int): MutableList<String>? {
 
 fun generateHelper(nL: Int, nR: Int, parenthesis: String, src: MutableList<String>) {
 
-    if ((nL < 0) or (nR < 0)) {
+    if ((nL < 0) || (nR < 0)) {
         return
     }
 
-    if ((nL == 0) and (nR == 0)) {
+    if ((nL == 0) && (nR == 0)) {
         src.add(parenthesis)
     }
 
@@ -90,9 +90,9 @@ fun reverseWord(src: String): String {
 fun longestCommonPrefix(src: Array<String>?): String {
     if (src.isNullOrEmpty()) return ""
     var prefix = src[0]
-    for (i in 1 until src.size - 1) {
+    for (i in 1 until src.size) {
         var j = 0
-        while ((j < src[i].length) and (j < prefix.length) and (src[i][j] == prefix[j])) {
+        while (!(!(j < src[i].length) || !(j < prefix.length) || !(src[i][j] == prefix[j]))) {
             j++
         }
         if (j == 0) return ""
@@ -131,7 +131,7 @@ fun main() {
 //    generatePossibleNextMoves(ss).forEach(::println)
 //    var ss = "A B C Hello World"
 //    println(reverseWord(ss))
-//    var ss = arrayOf("AAB", "AAC", "AAAD")
-//    println(longestCommonPrefix(ss))
-    println(palindromdNumber(1231))
+    var ss = arrayOf("AAB", "AAC", "AAAD")
+    println(longestCommonPrefix(ss))
+//    println(palindromdNumber(1231))
 }

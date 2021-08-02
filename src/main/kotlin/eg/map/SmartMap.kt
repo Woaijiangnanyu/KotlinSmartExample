@@ -82,7 +82,7 @@ fun maxPoints(points: Array<HashPoint>): Int {
         for (j in i  until points.size - 1 ) {
             println("ponits[$i] = (${points[i].x},${points[i].y})")
             println("ponits[${j+1}] = (${points[j+1].x},${points[j+1].y})")
-            if ((points[i].x == points[j+1].x) and (points[i].y == points[j+1].y)) {
+            if ((points[i].x == points[j+1].x) && (points[i].y == points[j+1].y)) {
                 overLap++
                 continue
             }
@@ -91,11 +91,11 @@ fun maxPoints(points: Array<HashPoint>): Int {
             // 考虑垂直横坐标情况
             //考虑平行横坐标情况
             when {
-                (points[i].x == points[j+1].x) and (points[i].y != points[j+1].y) -> {
+                (points[i].x == points[j+1].x) && (points[i].y != points[j+1].y) -> {
                     isSpecial = true
                     tag = "|"
                 }
-                (points[i].y == points[j+1].y) and (points[i].x != points[j+1].x) -> {
+                (points[i].y == points[j+1].y) && (points[i].x != points[j+1].x) -> {
                     isSpecial = true
                     tag = "-"
                 }
@@ -127,7 +127,7 @@ fun bubblePoint(src: Array<HashPoint>): Array<HashPoint> {
     for (i in src.indices) {
         for (j in 0 until src.size - i - 1) {
             if ((src[j].x > src[j+1].x)
-                or ((src[j].x == src[j+1].x) and (src[j].y > src[j+1].y))) {
+                or ((src[j].x == src[j+1].x) && (src[j].y > src[j+1].y))) {
                 var temp = src[j+1]
                 src[j+1] = src[j]
                 src[j] = temp

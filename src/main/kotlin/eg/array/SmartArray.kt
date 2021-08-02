@@ -13,7 +13,7 @@ fun plusOne(num: Array<Int>): Array<Int> {
     val size = num.size
     var i = size - 1;
     run {
-        while ((i >= 0) and (carries > 0)) {
+        while ((i >= 0) && (carries > 0)) {
             val sum = num[i] + carries
             num[i] = sum % 10
             carries = sum / 10
@@ -87,7 +87,7 @@ fun mergeSortArray(srcA: Array<Int>, srcB: Array<Int>): Array<Int> {
     var index = a.size + b.size - 1
     //数组扩容
     a = Arrays.copyOf(a, a.size + b.size)
-    while ((i >= 0) and (j >= 0)) {
+    while ((i >= 0) && (j >= 0)) {
         if (a[i] > b[j]) {
             a[index--] = a[i--]
         } else a[index--] = b[j--]

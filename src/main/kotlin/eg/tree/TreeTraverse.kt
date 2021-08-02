@@ -224,7 +224,7 @@ fun isValidBST(root: TreeNode<Long>?, min: Long, max: Long): Boolean {
 //    println("root.value:${root.value}")
 //    println("min$min")
 //    println("max$max")
-    if ((root.value <= min) or (root.value >= max)) return false
+    if ((root.value <= min) || (root.value >= max)) return false
     return (isValidBST(root.left, min, root.value)
             and
             isValidBST(root.right, root.value, max))

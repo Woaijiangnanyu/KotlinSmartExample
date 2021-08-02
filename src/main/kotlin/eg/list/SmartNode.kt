@@ -81,10 +81,10 @@ fun reverseNodeList(head: ListNode<Int>?): ListNode<Int>? {
  * 判断是否含有环形结构
  */
 fun hasCycle(head: ListNode<Int>?): Boolean {
-    if ((head == null) or (head?.next == null)) return false
+    if ((head == null) || (head?.next == null)) return false
     var fast = head
     var slow = head
-    while ((fast?.next != null) and (fast?.next?.next != null)) {
+    while ((fast?.next != null) && (fast?.next?.next != null)) {
         slow = slow?.next
         fast = fast?.next?.next
         if (slow == fast) {
@@ -101,7 +101,7 @@ fun middleNodeList(head: ListNode<Int>?): ListNode<Int>? {
     if (head == null) return null
     var fast = head
     var slow = head
-    while ((fast?.next != null) and (fast?.next?.next != null)) {
+    while ((fast?.next != null) && (fast?.next?.next != null)) {
         slow = slow?.next
         fast = fast?.next?.next
     }
@@ -116,7 +116,7 @@ fun mergeTwoNodeList(first: ListNode<Int>?, second: ListNode<Int>?): ListNode<In
     var two = second
     var temp: ListNode<Int>? = ListNode<Int>(0)
     var lastNext = temp
-    while ((one != null) and (two != null)) {
+    while ((one != null) && (two != null)) {
         var a = one?.e ?: Int.MIN_VALUE
         var b = two?.e ?: Int.MIN_VALUE
 //        println("a $a -- b $b")
@@ -141,7 +141,7 @@ fun mergeTwoNodeList(first: ListNode<Int>?, second: ListNode<Int>?): ListNode<In
  * 归并排序方式
  */
 fun sortList1(head: ListNode<Int>?): ListNode<Int>? {
-    if ((head == null) or (head?.next == null)) return head
+    if ((head == null) || (head?.next == null)) return head
     val middle = middleNodeList(head)
     var right = sortList1(middle?.next)
     middle?.next = null

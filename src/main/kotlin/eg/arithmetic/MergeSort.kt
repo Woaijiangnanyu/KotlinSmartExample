@@ -16,7 +16,7 @@ fun mergeSort(values: IntArray, l: Int, h: Int): IntArray {
     var m = 0
     var i = 0
     var j = 0
-    while ((i < left.size) and (j < right.size)) {  // 合并集合排序
+    while ((i < left.size) && (j < right.size)) {  // 合并集合排序
         newArr[m++] = if (left[i] < right[j]) {
             left[i++]
         } else {

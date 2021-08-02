@@ -23,7 +23,7 @@ fun topK(src: Array<Int>?, key: Int): Int {
  */
 
 fun kthLargeElement(src: Array<Int>, key: Int): Int {
-    if (src.isNullOrEmpty() or (key < 1) or (key > src.size)) return -1
+    if (src.isNullOrEmpty() || (key < 1) || (key > src.size)) return -1
     return partitionElement(src, 0, src.size - 1, src.size - key)
 }
 
@@ -36,10 +36,10 @@ fun partitionElement(src: Array<Int>, start: Int, end: Int, key: Int): Int {
     var right = end
     val pivot = src[(end + start) / 2]
     while (left <= right) {
-        while ((left <= right) and (src[left] < pivot)) {
+        while ((left <= right) && (src[left] < pivot)) {
             left++
         }
-        while ((left <= right) and (src[right] > pivot)) {
+        while ((left <= right) && (src[right] > pivot)) {
             right--
         }
         if (left <= right) {

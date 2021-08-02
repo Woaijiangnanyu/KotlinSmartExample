@@ -5,13 +5,13 @@ fun QSort(values: IntArray, start: Int, end: Int): IntArray {
     var i = start
     var j = end
     while (i < j) {
-        while ((i < j) and (values[j] > piont)) {
+        while ((i < j) && (values[j] > piont)) {
             j--
         }
-        while ((i < j) and (values[i] < piont)) {
+        while ((i < j) && (values[i] < piont)) {
             i++
         }
-        if ((values[i] == values[j]) and (i < j)) {
+        if ((values[i] == values[j]) && (i < j)) {
             i++ // 防止空转
         } else {
             val temp = values[i]
