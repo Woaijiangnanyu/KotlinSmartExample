@@ -43,14 +43,36 @@ fun convertToTitle(num: Int): String {
     while (n > 0) {
         n--
         str.append('A'.plus(n % 26))
-        n/=26
+        n /= 26
     }
     return str.reverse().toString()
 }
 
+/**
+ * 字符串翻转
+ * 初始状态：++++++-+
+ * --++++-+
+ * +--+++-+
+ * ++--++-+
+ * +++--+-+
+ * ++++---+
+ */
+fun generatePossibleNextMoves(str: String): MutableList<String> {
+    var list = mutableListOf<String>()
+    var i = -1
+    i = str.indexOf("++", i + 1)
+    while (i >= 0) {
+        list.add("${str.substring(0, i)}--${str.substring(i + 2)}")
+        i = str.indexOf("++", i + 1)
+    }
+    return list
+}
+
 fun main() {
 //    generateParenthesis(3)?.forEach(::println)
-    println(convertToTitle(27))
+//    println(convertToTitle(27))
 //    var ss = SmartSort()
 //    println(ss.convertToTitle(28))
+    var ss = "++++++-+"
+    generatePossibleNextMoves(ss).forEach(::println)
 }
