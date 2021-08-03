@@ -36,6 +36,26 @@ fun getMaxLength(dict: Set<String>): Int {
     return max
 }
 
+/**
+ * 爬楼梯，设有n节台阶，每次直走一步或两步，求最多有几种走法
+ */
+fun climbStairs(n: Int): Int {
+    if (n == 0) return 0
+    //
+    // 拆分问题
+    // 每个阶段结果都对下个阶段产生影响，最终一个阶段的结果就是我们要求解的结果
+    // 假设将台阶划分成 n + 1 个阶段（开始和结束无非就是一步或者两步）
+    var steps = arrayOfNulls<Int>(n + 1)
+    steps[0] = 1
+    if (steps.size > 1){
+        steps[1] = 1
+    }
+    for (i in 2 until steps.size){
+        steps[i] = steps[i-1]!! + steps[i-2]!!
+    }
+    return steps[n]!!
+}
+
 fun main() {
-    println(wordBreak("AABAA", setOf("AA","AB","A")))
+    println(wordBreak("AABAA", setOf("AA", "AB", "A")))
 }
