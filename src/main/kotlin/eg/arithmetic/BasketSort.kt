@@ -18,11 +18,11 @@ fun basketSort(values: IntArray): IntArray {
         basket.add(i, mutableListOf())
     }
     for (num in values) {
-        basket.get((num-min).div(values.size)).add(num)
+        basket[(num-min).div(values.size)].add(num)
     }
 
     for (i in basket.indices){
-        Collections.sort(basket.get(i))
+        basket.run { get(i).sort() }
     }
     var index = 0
     for (i in basket.indices){

@@ -1,6 +1,14 @@
 package eg.dynamic
 
 /**
+ *DP问题一般分为三步骤
+ * 1.定义数组含意
+ * 2.找出初始值
+ * 3.找出数组元素之间的联系
+ */
+
+
+/**
  * 单词拆解
  * 给定字符串str和字典，str是否可以分割成一个或者多个以空格分割的子串，并且子串都在字典中
  */
@@ -72,12 +80,52 @@ fun houseRobber(A: Array<Int>?): Int {
     val profit = arrayOfNulls<Int>(A.size + 1)
     profit[0] = 0
     profit[1] = A[0]
-    for (i in 2 until profit.size){
-        profit[i] = Math.max((profit[i - 2]!! + A[i-1]),profit[i-1]!!)
+    for (i in 2 until profit.size) {
+        profit[i] = Math.max((profit[i - 2]!! + A[i - 1]), profit[i - 1]!!)
     }
     return profit[A.size]!!
 }
 
+/**
+ * 编辑距离
+ * 给出两个单词word1和word2，计算出将word1 转换为word2的最少操作次数。你总共三种操作方法：插入一个字符、删除一个字符、替换一个字符。
+ * 全局是对word1进行增删改
+ */
+fun minDistance(word1: String, word2: String): Int {
+    val n = word1.length + 1
+    val m = word2.length + 1
+    val num = arrayOfNulls<Array<Int?>>(n)
+    for (i in num.indices) {
+        num[i] = arrayOfNulls(m)
+    }
+    //当 word2为空时，只需要word1删除i次即可
+    for (i in 0 until n) {
+        num[i]!![0] = i
+    }
+    //当 word1为空，只要插入word1j次即可
+    for (j in 0 until m) {
+        num[0]!![j] = j
+    }
+    for (i in 1 until n) {
+        for (j in 1 until m) {
+            if (word1[i - 1] == word2[j - 1]) { // 如果 word1的第i个字符和word2的第j个字符相同
+                num[i]!![j] = num[i-1]!![j-1] //  num[i][j]操作次数和num[i-1][j-1]操作次数相同
+            } else {
+                //所有增删改步骤只改变一个字符，步骤 + 1
+                //num[i][j] = num[i][j-1]  + 1  -> word1 （i，j）进行插入前第j字符操作 + 1
+                //num[i][j] = num[i-1][j]  + 1  -> word1 (i,j) 进行删除前第i字符操作  + 1
+                //num[i][j] = num[i-1][j-1] + 1 -> word1 (i,j) 进行前第j字符替换前第i字符操作  + 1
+                num[i]!![j] = (num[i]!![j - 1]!!).coerceAtMost(num[i - 1]!![j]!!).coerceAtMost(num[i - 1]!![j - 1]!!) +1
+            }
+        }
+    }
+    return num[n-1]!![m-1]!!
+}
+
 fun main() {
-    println(wordBreak("AABAA", setOf("AA", "AB", "A")))
+//    println(wordBreak("AABAA", setOf("AA", "AB", "A")))
+    println(minDistance("hello",""))
+    println(minDistance("","world"))
+    println(minDistance("hello","world"))
+    println(minDistance("heold","world"))
 }
