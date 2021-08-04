@@ -109,23 +109,42 @@ fun minDistance(word1: String, word2: String): Int {
     for (i in 1 until n) {
         for (j in 1 until m) {
             if (word1[i - 1] == word2[j - 1]) { // 如果 word1的第i个字符和word2的第j个字符相同
-                num[i]!![j] = num[i-1]!![j-1] //  num[i][j]操作次数和num[i-1][j-1]操作次数相同
+                num[i]!![j] = num[i - 1]!![j - 1] //  num[i][j]操作次数和num[i-1][j-1]操作次数相同
             } else {
                 //所有增删改步骤只改变一个字符，步骤 + 1
                 //num[i][j] = num[i][j-1]  + 1  -> word1 （i，j）进行插入前第j字符操作 + 1
                 //num[i][j] = num[i-1][j]  + 1  -> word1 (i,j) 进行删除前第i字符操作  + 1
                 //num[i][j] = num[i-1][j-1] + 1 -> word1 (i,j) 进行前第j字符替换前第i字符操作  + 1
-                num[i]!![j] = (num[i]!![j - 1]!!).coerceAtMost(num[i - 1]!![j]!!).coerceAtMost(num[i - 1]!![j - 1]!!) +1
+                num[i]!![j] =
+                    (num[i]!![j - 1]!!).coerceAtMost(num[i - 1]!![j]!!).coerceAtMost(num[i - 1]!![j - 1]!!) + 1
             }
         }
     }
-    return num[n-1]!![m-1]!!
+    return num[n - 1]!![m - 1]!!
+}
+
+fun maxProduct(nums: Array<Int>): Int {
+    var max = Int.MIN_VALUE
+    var imax = 1
+    var imin = 1
+    for (value in nums) {
+        if (value < 0) {
+            var temp = imin
+            imin = imax
+            imax = temp
+        }
+        imax = Math.max(imax.times(value), value)
+        imin = Math.min(imin.times(value), value)
+        max = Math.max(max, imax)
+    }
+    return max
 }
 
 fun main() {
 //    println(wordBreak("AABAA", setOf("AA", "AB", "A")))
-    println(minDistance("hello",""))
-    println(minDistance("","world"))
-    println(minDistance("hello","world"))
-    println(minDistance("heold","world"))
+//    println(minDistance("hello", ""))
+//    println(minDistance("", "world"))
+//    println(minDistance("hello", "world"))
+//    println(minDistance("heold", "world"))
+    println(maxProduct(arrayOf(-1,2,2,-8)))
 }
