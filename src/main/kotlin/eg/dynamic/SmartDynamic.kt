@@ -123,6 +123,13 @@ fun minDistance(word1: String, word2: String): Int {
     return num[n - 1]!![m - 1]!!
 }
 
+/**
+ * 遍历数组，计算当前最大值，并不断更新
+ * 另imax为当前最大，则 imax = max(imax * value,imax)
+ * 由于存在负值，会导致最大的值变成最小，最小的值变成最大，需要维护当前最小值imin = min(imin * value,value)
+ * 出现负值时，交换imin、imax
+ * 时间复杂度O(n)
+ */
 fun maxProduct(nums: Array<Int>): Int {
     var max = Int.MIN_VALUE
     var imax = 1
@@ -146,5 +153,6 @@ fun main() {
 //    println(minDistance("", "world"))
 //    println(minDistance("hello", "world"))
 //    println(minDistance("heold", "world"))
-    println(maxProduct(arrayOf(-1,2,2,-8)))
+//    println(maxProduct(arrayOf(-1,2,2,8)))
+
 }
