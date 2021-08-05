@@ -75,6 +75,24 @@ fun isValidSudoku(board: Array<Array<String>>): Boolean {
     return true
 }
 
+/**
+ * 图片旋转 90度
+ */
+fun rotatePicture(matrix: Array<Array<Int>>): Array<Array<Int>>? {
+    if (matrix.isEmpty()) return null
+    val len = matrix.size
+    for (i in 0 until len / 2) {
+        for (j in 0 until (len + 2) / 2) {
+            var temp = matrix[i][j]
+            matrix[i][j] = matrix[len - j - 1][i]
+            matrix[len - j - 1][i] = matrix[len - i - 1][len - j - 1]
+            matrix[len - i - 1][len - j - 1] = matrix[j][len - i - 1]
+            matrix[j][len - i - 1] = temp
+        }
+    }
+    return matrix
+}
+
 fun main() {
 //    val aa = arrayOfNulls<Array<Int>>(3)
 //    aa[0] = arrayOf(1, 2, 3, 4)
@@ -82,16 +100,22 @@ fun main() {
 //    aa[2] = arrayOf(9, 10, 11, 12)
 //    aa as Array<Array<Int>>
 //    spiralOrder(aa)?.forEach(::println)
-    val aa = arrayOfNulls<Array<String>>(9)
-    aa[0] = arrayOf(".", ".", "8", ".",".",".","2",".",".")
-    aa[1] = arrayOf(".", "3", ".", "8",".","2",".","6",".")
-    aa[2] = arrayOf("7", ".", ".", ".","9",".",".",".","5")
-    aa[3] = arrayOf(".", "5", ".", ".",".",".",".","1",".")
-    aa[4] = arrayOf(".", ".", "4", ".",".",".","6",".",".")
-    aa[5] = arrayOf(".", "2", ".", ".",".",".",".","7",".")
-    aa[6] = arrayOf("4", ".", ".", ".","8",".",".",".","6")
-    aa[7] = arrayOf(".", "7", ".", "1",".","3",".","9",".")
-    aa[8] = arrayOf(".", ".", "1", ".",".",".","8",".",".")
-    aa as Array<Array<String>>
-    println(isValidSudoku(aa))
+//    val aa = arrayOfNulls<Array<String>>(9)
+//    aa[0] = arrayOf(".", ".", "8", ".", ".", ".", "2", ".", ".")
+//    aa[1] = arrayOf(".", "3", ".", "8", ".", "2", ".", "6", ".")
+//    aa[2] = arrayOf("7", ".", ".", ".", "9", ".", ".", ".", "5")
+//    aa[3] = arrayOf(".", "5", ".", ".", ".", ".", ".", "1", ".")
+//    aa[4] = arrayOf(".", ".", "4", ".", ".", ".", "6", ".", ".")
+//    aa[5] = arrayOf(".", "2", ".", ".", ".", ".", ".", "7", ".")
+//    aa[6] = arrayOf("4", ".", ".", ".", "8", ".", ".", ".", "6")
+//    aa[7] = arrayOf(".", "7", ".", "1", ".", "3", ".", "9", ".")
+//    aa[8] = arrayOf(".", ".", "1", ".", ".", ".", "8", ".", ".")
+//    aa as Array<Array<String>>
+//    println(isValidSudoku(aa))
+    val aa = arrayOfNulls<Array<Int>>(3)
+    aa[0] = arrayOf(1, 2, 3)
+    aa[1] = arrayOf(4, 5, 6)
+    aa[2] = arrayOf(7, 8, 9)
+    aa as Array<Array<Int>>
+    rotatePicture(aa)?.forEach { it.forEach(::print) }
 }
