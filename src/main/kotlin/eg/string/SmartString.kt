@@ -113,13 +113,36 @@ fun palindromdNumber(num: Int): Boolean {
         div *= 10
     }
     while (n > 0) {
-        if (n.div(div) != n.rem(10)){
+        if (n.div(div) != n.rem(10)) {
             return false
         }
         n = (n.rem(div).div(10))
         div = div.div(100)
     }
     return true
+}
+
+/**
+ * 翻转整数
+ * 给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
+ * 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。
+ * 假设环境不允许存储 64 位整数（有符号或无符号）
+ * 120 ->0
+ * 123 -> 321
+ */
+fun reverseInteger(num: Int): Int {
+    var n = num
+    var reversed_n = 0
+    while (n != 0) {
+        var temp = reversed_n.times(10) + n.rem(10)
+        n /= 10
+        if (temp.div(10) != reversed_n){
+            reversed_n = 0
+            break
+        }
+        reversed_n = temp
+    }
+    return reversed_n
 }
 
 fun main() {
@@ -131,7 +154,8 @@ fun main() {
 //    generatePossibleNextMoves(ss).forEach(::println)
 //    var ss = "A B C Hello World"
 //    println(reverseWord(ss))
-    var ss = arrayOf("AAB", "AAC", "AAAD")
-    println(longestCommonPrefix(ss))
+//    var ss = arrayOf("AAB", "AAC", "AAAD")
+//    println(longestCommonPrefix(ss))
 //    println(palindromdNumber(1231))
+    println(reverseInteger(120))
 }
