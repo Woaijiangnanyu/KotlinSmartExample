@@ -1,5 +1,7 @@
 package gjl.utils;
 
+import java.util.ArrayList;
+
 public class SmartSort {
     public static void basket(int[] data)//data为待排序数组
     {
@@ -40,5 +42,14 @@ public class SmartSort {
             n /= 26;
         }
         return str.reverse().toString();
+    }
+
+    public ArrayList<Integer> grayCode(int n) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        for (int i = 0; i < (1 << n); i++) {
+            System.out.println("i = "+i + "  i >> 1  = " + (i >> 1)  + "   i ^ (i >> 1)  = " + (i ^ (i >> 1)));
+            result.add(i ^ (i >> 1));
+        }
+        return result;
     }
 }
