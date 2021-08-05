@@ -1,6 +1,7 @@
 package eg.string
 
 import gjl.utils.SmartSort
+import java.io.File
 import java.lang.StringBuilder
 
 /**
@@ -109,7 +110,7 @@ fun palindromdNumber(num: Int): Boolean {
     var n = num
     if (n < 0) return false
     var div = 1
-    while (n.div(div) >= 10) {
+    while (n.div(div) >= 10) { // 找到初始的除数
         div *= 10
     }
     while (n > 0) {
@@ -134,7 +135,7 @@ fun reverseInteger(num: Int): Int {
     var n = num
     var reversed_n = 0
     while (n != 0) {
-        var temp = reversed_n.times(10) + n.rem(10)
+        var temp = reversed_n.times(10) + n.rem(10)//rem取模
         n /= 10
         if (temp.div(10) != reversed_n){
             reversed_n = 0
@@ -143,6 +144,20 @@ fun reverseInteger(num: Int): Int {
         reversed_n = temp
     }
     return reversed_n
+}
+
+/**
+ * 给定一个文件，统计每个字符个数（不包括空格），以字符和字符个数分组输出
+ */
+fun stringGroup(){
+    File("build.gradle").readText()
+        .toCharArray()
+        .filterNot(Char::isWhitespace)
+        .groupBy {
+            it }
+        .map {
+            it.key to it.value.size
+        }.let(::println)
 }
 
 fun main() {
@@ -157,5 +172,6 @@ fun main() {
 //    var ss = arrayOf("AAB", "AAC", "AAAD")
 //    println(longestCommonPrefix(ss))
 //    println(palindromdNumber(1231))
-    println(reverseInteger(120))
+//    println(reverseInteger(120))
+    stringGroup()
 }
