@@ -43,7 +43,7 @@ fun CountSort(values: IntArray): IntArray {
     }
 
     // 优化计数数组大小
-    var count = IntArray(max - min + 1)
+    val count = IntArray(max - min + 1)
     for (num in values) {
         count[num - min] += 1
     }
@@ -65,6 +65,7 @@ fun CountSort(values: IntArray): IntArray {
 /**
  * 基于计数排序实现
  * 比较两个数组，是否数组A全部包含数组B，假设数组A大，数组B小
+ * O(n)
  */
 fun compareTwoArray(A: Array<Int>, B: Array<Int>): Boolean {
     //首先找到数组A的最大值
