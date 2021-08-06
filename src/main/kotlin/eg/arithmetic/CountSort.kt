@@ -1,5 +1,8 @@
 package eg.arithmetic
 
+/**
+ * 计数排序基础版
+ */
 fun CountSort01(values: IntArray): IntArray {
 
     //找出values数组中的最大值
@@ -59,10 +62,41 @@ fun CountSort(values: IntArray): IntArray {
     return result
 }
 
+/**
+ * 基于计数排序实现
+ * 比较两个数组，是否数组A全部包含数组B，假设数组A大，数组B小
+ */
+fun compareTwoArray(A: Array<Int>, B: Array<Int>): Boolean {
+    //首先找到数组A的最大值
+    var max = Int.MIN_VALUE
+    for (i in A.indices) {
+        max = Math.max(max, A[i])
+    }
+    // 赋值数组大小 max+1
+    val array = Array<Int>(max + 1) { 0 }
+    //统计A数组中元素出现次数
+    for (i in A.indices) {
+        array[A[i]] += 1
+    }
+    //记录B中在A中出现的次数
+    var count = 0
+    for (i in B.indices) {
+        if (B[i] >= max + 1) {
+            break
+        }
+        if (A[B[i]] > 0) {
+            count++
+        }
+    }
+    //B中元素全部出现在A中会有count == B.size的情况
+    return count == B.size
+}
+
 fun main() {
 //    val nums = intArrayOf(0, 2, 5, 3, 7, 9, 10, 3, 7, 6)
 //    val nums = intArrayOf(0,1,100)
 //    CountSort01(nums).forEach(::println)
 //    CountSort(nums).forEach(::println)
 //    println(1 % 10)
+    println(compareTwoArray(arrayOf(1, 2, 3, 4, 5), arrayOf(2, 3, 4)))
 }
