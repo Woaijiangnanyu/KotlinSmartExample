@@ -51,11 +51,15 @@ fun CountSort(values: IntArray): IntArray {
     //
     for (i in 1 until count.size) {
         count[i] += count[i - 1]
-        println("count[$i] = ${count[i]}")
     }
 
     val result = IntArray(values.size)
     for (j in (values.size - 1) downTo 0) {
+        //var aa = values[j] //当前待排数据
+        //var index = count[values[j] - min] - 1 //加总数组中对应values中元素下标
+        //result[index] = aa  //将数据存入对应的下标中
+        //count[values[j] - min]-- //加总数组中，该值减一
+        //缩写成一下形式
         result[--count[values[j] - min]] = values[j]
     }
 

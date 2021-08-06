@@ -3,6 +3,7 @@ package eg.arithmetic
 /**
  * 最好O(n) 最坏 O(n²)
  * 稳定排序
+ * 建议小数组使用（1000以内）
  */
 fun insertSort(A: Array<Int>): Array<Int> {
     for (i in 1 until A.size) {
