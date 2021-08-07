@@ -19,5 +19,9 @@ fun insertSort(A: Array<Int>): Array<Int> {
 }
 
 fun main() {
-    insertSort(arrayOf(9,3,6,4,7,1,4)).forEach(::println)
+//    insertSort(arrayOf(9,3,6,4,7,1,4)).forEach(::println)
+    val gap = 3
+    var j = 4
+    j-=gap
+    println(j)
 }
